@@ -1,0 +1,64 @@
+body {
+  background-color: white;
+  color: #303030;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 20px;
+}
+
+main {
+  background-color: #f0f0f0;
+  margin: 20px auto;
+  max-width: 450px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Format the list */
+li {
+  background-color: #ccc;
+  color: #303030;
+  padding: 8px;
+  border: 1px;
+  border-radius: 5px;
+  list-style:none;
+  left-padding: -2.5em;	
+}
+li:nth-child(2n+2){
+	background-color: #f0f0f0;
+}
+#history{
+	margin-left: -35px;
+}
+button{
+	background-color: #599898;
+	border: 5px solid #599898;
+	border-radius: 5px;
+	color: white;
+}
+
+/* Format the input form - w3schools.com*/
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: 5px;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #8FD2D2;
+  padding: 8px;
+  margin-left: 5px;
+}
+
+/* Not used at moment - keep it for later*/
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
