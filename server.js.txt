@@ -1,5 +1,3 @@
-console.log('hello from our node script!');
-
 var express = require('express');
 var app = express();
 
