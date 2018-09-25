@@ -8,12 +8,20 @@ app.use(express.static('client'));
 
 var io = require('socket.io')(server);
 
-io.on('connection', function (socket) {
-  socket.on('message', function (msg) {
-    io.emit('message', msg);
+io.on('connection', function (socket)
+{
+	/* Receive the message */
+  socket.on('InitMsg', function (InitText, MsgText) 
+  {
+  	/* Log the message to the server console */
+  	console.log('server.js recieved : ', InitText, MsgText);
+
+  	/* Send the message back out */
+    io.emit('InitMsg', InitText, MsgText);
   });
 });
 
-server.listen(8080, function() {
+server.listen(8080, function() 
+{
   console.log('Chat server running');
 });
