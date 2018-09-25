@@ -44,15 +44,11 @@ io.on('connection', function (socket)
   });
 });
 
-/*server.listen(80, function() 
-{
-  console.log('Chat server running');
-});*/
 
-/* Added Heroku port definitions*/
-var server = require('http').createServer();
-var port = process.env.PORT || 3000;
+/* Added Heroku port handling */
+var port = process.env.PORT || 8080;
 
 server.listen(port, function() {
   console.log('Listening on ' + port);
+  console.log('Chat server running');
 });
