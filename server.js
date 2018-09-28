@@ -21,7 +21,7 @@ function askingWeather(msg) {
  return msg.match(/weather/i)
 }
 
-/* Function for the wmetaweather API */
+/* Function for the metaweather API */
 /* Needed the request module installed - 'npm install request --save' */
 function getWeather(callback) {
 	var request = require('request');
@@ -47,6 +47,7 @@ io.on('connection', function (socket)
   	console.log('Looping through the array : ', item, index);
 
   	/* Send the message out */
+  	/* There's a bug here that's causing all the people in this chat to receive the messages from the array again */
     io.emit('InitMsg', item);
   });
 
