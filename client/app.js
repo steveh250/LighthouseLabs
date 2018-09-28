@@ -6,8 +6,11 @@ $('form').submit(function ()
   var InitText = $('#initials').val();
   var MsgText = $('#message').val();
 
-  /* Send the message in parts*/
-  socket.emit('InitMsg', InitText, MsgText);
+  /* Build the Message from the parts and send to server*/
+  var Message = InitText;
+    Message += " says: ";
+    Message += MsgText;
+  socket.emit('InitMsg', Message);
 
   /* Clear out the variables */
   $('#initials').val('');

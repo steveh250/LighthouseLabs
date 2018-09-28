@@ -8,9 +8,36 @@ app.use(express.static('client'));
 
 var io = require('socket.io')(server);
 
-/* Array for our messages to iterate back to new joiners */
+/* Array for our messages to iterate back to new chat joiners */
 var MsgArray = [];
 
+/* Has a question been asked */
+function isQuestion(msg) {
+ return msg.match(/\?$/)
+}
+
+/* Is this a question about the weather */
+function askingWeather(msg) {
+ return msg.match(/weather/i)
+}
+
+/* Function for the wmetaweather API */
+/* Needed the request module installed - 'npm install request --save' */
+function getWeather(callback) {
+	var request = require('request');
+ 
+	 /* Grab the message from the API */
+	 request.get("https://www.metaweather.com/api/location/4118/", function (error, response) 
+	 {
+	 	if (!error && response.statusCode == 200) 
+	 	{
+	 		var data = JSON.parse(response.body);
+	 		callback(data.consolidated_weather[0].weather_state_name);
+	 	}
+	 })
+}
+
+/* Socket function for chat */
 io.on('connection', function (socket)
 {
   /* Iterate through the array as this is the first connection time */
@@ -24,26 +51,35 @@ io.on('connection', function (socket)
   });
 
   /* Receive the message */
-  socket.on('InitMsg', function (InitText, MsgText) 
+  socket.on('InitMsg', function (Message) 
   {
-  	/* Log the message to the server console */
-  	console.log('server.js recieved : ', InitText, MsgText);
+	  	/* Log the message to the server console */
+	  	console.log('server.js recieved : ', Message);
 
-  	/* Lets build the message to store and store in the array */
-  	/* Could have done this at the sending client but it maybe useful to keep the message pieces in the server*/
-  	var Message = InitText;
-  	Message += " says: ";
-  	Message += MsgText;
-  	/* Add the message to the array */
-  	var newLength=MsgArray.push(Message);
-  	/* Log message to console for debugging */
-  	console.log('MsgArray - added : ', Message)
+	  	/* Add the message to the array */
+	  	var newLength=MsgArray.push(Message);
+	  	/* Log message to console for debugging */
+	  	console.log('MsgArray - added : ', Message)
 
-  	/* Send the message back out as a single message*/
-    io.emit('InitMsg', Message);
-  });
+		/* Respond to a weather question */
+		if (!isQuestion(Message)) 
+		{
+	 		io.emit('InitMsg', Message);
+	 	}
+		else if (askingWeather(Message)) 
+		{
+	 		/* Display the message anyway with note about checking */
+	 		io.emit('InitMsg', Message)
+	 		io.emit('InitMsg', '... Checking weather...')
+
+	 		/*Let's get the weather from the API */
+	 		getWeather(function(weather)
+	 		{ 
+				io.emit('InitMsg', weather)
+			})
+	 	}
+ 	});
 });
-
 
 /* Added Heroku port handling */
 var port = process.env.PORT || 8080;
