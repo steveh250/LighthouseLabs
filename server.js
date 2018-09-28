@@ -58,6 +58,7 @@ io.on('connection', function (socket)
 
 	  	/* Add the message to the array */
 	  	var newLength=MsgArray.push(Message);
+
 	  	/* Log message to console for debugging */
 	  	console.log('MsgArray - added : ', Message)
 
@@ -68,14 +69,16 @@ io.on('connection', function (socket)
 	 	}
 		else if (askingWeather(Message)) 
 		{
-	 		/* Display the message anyway with note about checking */
+	 		/* Display the message anyway with note about checking  and add to array*/
 	 		io.emit('InitMsg', Message)
-	 		io.emit('InitMsg', '... Checking weather...')
-
-	 		/*Let's get the weather from the API */
+	 		io.emit('InitMsg', '... Checking weather ...')
+			var newLength=MsgArray.push('... Checking weather ...')
+	 		
+	 		/*Let's get the weather from the API and store in array*/
 	 		getWeather(function(weather)
 	 		{ 
 				io.emit('InitMsg', weather)
+				var newLength=MsgArray.push(weather);
 			})
 	 	}
  	});
