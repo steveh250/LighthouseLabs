@@ -17,7 +17,6 @@ function countRows() {
   
   /* Function to return the rows */
   function rowCount() {
-    /*return $('tr', $(this).find('tbody')).length;*/
     return GRID.length;
   }
   
