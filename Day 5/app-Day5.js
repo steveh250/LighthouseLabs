@@ -38,26 +38,25 @@ function totalCells() {
 }
 
 
-function convertColumn(cellCoordinate){
+function convertColumn(coordinate){
 
-	var cellCoordinate = "c4";
-	console.log(cellCoordinate);
+	console.log(coordinate);
 
 	/* Split the cell location into two to get the first character which should be A-Z or a-z */
-	var locationString = cellCoordinate.split("");
-	var columnOnly = locationString[0];
-	console.log(columnOnly);
+	/* Could add some error checking here to make sure it's between A-Z or a-z */
+	coordinate.split("");
+	columnOnly = coordinate[0];
 
-	/* Convert it to lowercase */
+	/* Convert it to uppercase */
 	columnOnly = columnOnly.toUpperCase();
-	console.log(columnOnly);
 
 	/* Get the array location based on the ASCII value */
-	var columnLocation = columnOnly.charCodeAt(0) - 65;
-	console.log(columnLocation);
+	columnLocation = columnOnly.charCodeAt(0) - 65;
 
+	/* Return the array location */
+	return(columnLocation);
 
 }
-
-totalCells();
+/* Comment out totalCells for now */
+/* totalCells(); */
 convertColumn();
