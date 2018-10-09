@@ -20,7 +20,7 @@ function isCurrent(coordinate){
 	column = column.toUpperCase();
 	column = column.charCodeAt(0) - 65;
 
-      /* Check is we have a rock ^ at the coordinates */
+      /* Check is we have a tide ~ at the coordinates */
       if (GRID[row][column] == "~") {
             return(true);
       } else {
