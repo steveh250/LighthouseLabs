@@ -52,7 +52,7 @@ function allShips(){
 	return(shipArray);
 }
 
-function firstAndLastShips(){
+function shipReport(){
 	/* Populate an array with all the ships*/
 	var allOfTheShips=allShips();
 	
@@ -69,4 +69,4 @@ function firstAndLastShips(){
 	return(firstAndLastShipArray);
 }
 
-firstAndLastShips();
+shipReport();
