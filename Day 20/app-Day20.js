@@ -36,7 +36,6 @@ function safetyReport(){
             /* ... run howDangerous and add to safetyReportGRID */
             return row.map(columnCell => howDangerous(columnCell));
       })
-      console.log(safetyReportGRID);
       return safetyReportGRID;
 }
 
