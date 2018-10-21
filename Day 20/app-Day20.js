@@ -26,6 +26,8 @@ function howDangerous(cellSymbol){
       
 }
 
+
+/* https://medium.com/@joomiguelcunha/learn-map-filter-and-reduce-in-javascript-ea59009593c4 */
 function safetyReport(){
 
       /* For every row on the GRID */
